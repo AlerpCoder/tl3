@@ -18,7 +18,12 @@ mysqli_select_db($db_link, $db_name) or die('Benutzung der Datenbank ' . $db_nam
 
 function get_all_entries()
 {
+    ensure_table_exists();
+    global $db_link, $db_table;
 
+    $result = mysqli_query($db_link, "SELECT * FROM `" . $db_table . "` ORDER BY Datum DESC");
+    mysqli_close($db_link);
+    return $result;
 }
 
 function add_entry($input_date, $input_duration, $input_distance)
@@ -27,11 +32,6 @@ function add_entry($input_date, $input_duration, $input_distance)
 
     global $db_link, $db_table, $db_host, $db_user, $db_password, $db_name;
     $mysqli = new mysqli($db_host, $db_user, $db_password, $db_name);
-
-    if ($mysqli->connect_errno) {
-        echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-    }
-
 
     if (!($insert_statement = $mysqli->prepare("INSERT INTO `" . $db_table . "` (Datum, Dauer, Distanz) VALUES (?, ?, ?)"))) {
         echo "Prepare failed: (" . $db_link->errno . ") " . $db_link->error;
@@ -46,6 +46,18 @@ function add_entry($input_date, $input_duration, $input_distance)
 
 function delete_entry($entry_id)
 {
+    ensure_table_exists();
+    global $db_link, $db_table, $db_host, $db_user, $db_password, $db_name;
+    $mysqli = new mysqli($db_host, $db_user, $db_password, $db_name);
+    if (!($insert_statement = $mysqli->prepare("DELETE FROM `" . $db_table . "` WHERE ID = ?"))) {
+        echo "Prepare failed: (" . $db_link->errno . ") " . $db_link->error;
+    }
+    if (!($insert_statement->bind_param("i", $entry_id))) {
+        echo "Binding parameters failed: (" . $insert_statement->errno . ") " . $insert_statement->error;
+    }
+    $insert_statement->execute();
+    $insert_statement->close();
+
 
 }
 

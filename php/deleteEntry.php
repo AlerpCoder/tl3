@@ -3,6 +3,6 @@ include_once("db_link.php");
 
 $result = $_POST;
 
-add_entry($result['date'], $result['duration'], $result['route']);
+delete_entry($result['id']);
 
 header("Location:../index.php");

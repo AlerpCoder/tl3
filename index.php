@@ -75,6 +75,40 @@ include_once("php/db_link.php");
 </div>
 <div class="m-5">
     <h3 class="text-center font-weight-bold">Bisherige Läufe</h3>
+    <div class="row">
+        <?php
+        $result = get_all_entries();
+        while ($row = mysqli_fetch_array($result)) {
+            $id = $row['ID'];
+            $date = $row['Datum'];
+            $duration = $row['Dauer'];
+            $route = $row['Distanz'];
+            echo "
+            <div class='col-sm-6'>
+                <div class='card m-3'>
+                    <div class='card-body'>
+                        <dl>
+                            <dt>Datum</dt>
+                            <dd>" . $date . "</dd>
+                             <dt>Dauer</dt>
+                            <dd>" . $duration . " Minuten</dd>
+                             <dt>Distanz</dt>
+                            <dd>" . $route . " km</dd>
+                             <dt>Geschwindigkeit - Pace</dt>
+                            <dd> " . round(($route / ($duration / 60)), 2) . " km/h - " . round(($duration / $route), 2) . " Min/km</dd>
+                        </dl>
+                        <form action='php/deleteEntry.php' method='POST'>
+                            <input type='hidden' name='id' value='" . $id . "'>
+                            <input type='submit' value='L&ouml;schen' class='btn btn-danger'>
+                        </form>
+                    </div>
+                </div>
+            </div>  
+                    ";
+        }
+        ?>
+
+    </div>
 </div>
 </body>
 </html>
