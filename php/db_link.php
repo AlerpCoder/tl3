@@ -15,7 +15,6 @@ $create_database_sql = "CREATE DATABASE IF NOT EXISTS " . $db_name;
 mysqli_query($db_link, $create_database_sql) or die('Erstellen der Datenbank nicht möglich : ' . mysqli_error($db_link));
 mysqli_select_db($db_link, $db_name) or die('Benutzung der Datenbank ' . $db_name . ' nicht möglich: ' . mysqli_error($db_link));
 
-
 function get_all_entries()
 {
     ensure_table_exists();
@@ -25,6 +24,13 @@ function get_all_entries()
     mysqli_close($db_link);
 
     return $result;
+}
+
+function some_entries()
+{
+    for ($i = 1; $i <= 100; $i++) {
+        add_entry(date('Y/m/d', strtotime('-' . $i . ' day', strtotime(date('Y/m/d')))), rand(10, 400), rand(10, 500));
+    }
 }
 
 function add_entry($input_date, $input_duration, $input_distance)
@@ -42,7 +48,7 @@ function add_entry($input_date, $input_duration, $input_distance)
         echo "Binding parameters failed: (" . $insert_statement->errno . ") " . $insert_statement->error;
     }
     $insert_statement->execute();
-//    $insert_statement->close();
+    $insert_statement->close();
 
 }
 
@@ -58,7 +64,7 @@ function delete_entry($entry_id)
         echo "Binding parameters failed: (" . $insert_statement->errno . ") " . $insert_statement->error;
     }
     $insert_statement->execute();
-//    $insert_statement->close();
+    $insert_statement->close();
 
 
 }

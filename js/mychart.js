@@ -58,7 +58,7 @@ $(document).ready(function () {
     let dateDistance = (data) => {
         let diff = calculateDifference(data[1], dateList[dateList.length - 1]) / dateRange;
         return diff <= 0.2 ? 0.2 : diff;
-    }
+    };
 
     svg.selectAll("circle")
         .data(all_data)
