@@ -19,7 +19,7 @@ include_once("php/db_link.php");
     </style>
 
     <script>
-        var all_data = <?php echo json_encode([[10, 20], [10, 10], [55, 72]]); ?>;
+        var all_data = <?php echo json_encode((mysqli_fetch_all(get_all_entries()))); ?>;
     </script>
 
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
@@ -30,7 +30,7 @@ include_once("php/db_link.php");
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Sehr Grosser Penis</a>
+    <a class="navbar-brand" href="#">Sehr Gro&szlig;er Penis</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

@@ -23,6 +23,7 @@ function get_all_entries()
 
     $result = mysqli_query($db_link, "SELECT * FROM `" . $db_table . "` ORDER BY Datum DESC");
     mysqli_close($db_link);
+
     return $result;
 }
 
@@ -41,7 +42,8 @@ function add_entry($input_date, $input_duration, $input_distance)
         echo "Binding parameters failed: (" . $insert_statement->errno . ") " . $insert_statement->error;
     }
     $insert_statement->execute();
-    $insert_statement->close();
+//    $insert_statement->close();
+
 }
 
 function delete_entry($entry_id)
@@ -56,7 +58,7 @@ function delete_entry($entry_id)
         echo "Binding parameters failed: (" . $insert_statement->errno . ") " . $insert_statement->error;
     }
     $insert_statement->execute();
-    $insert_statement->close();
+//    $insert_statement->close();
 
 
 }
