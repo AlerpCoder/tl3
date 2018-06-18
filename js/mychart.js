@@ -3,8 +3,8 @@ $(document).ready(function () {
     console.log(all_data);
     let converseToVelocity = (data) => (data[3] / (data[2] / 60));
 
-    let maxVelocity = Math.max(... all_data.map(data => converseToVelocity(data)));
-    let maxDistance = Math.max(... all_data.map(data => data[3]));
+    let maxVelocity = Math.max(...all_data.map(data => converseToVelocity(data)));
+    let maxDistance = Math.max(...all_data.map(data => data[3]));
 
     let sortDate = (date1, date2) => {
         date1 = new Date(date1.dateModified);
@@ -18,7 +18,7 @@ $(document).ready(function () {
     // draw coordinate system
     let svg = d3.select('#chart');
 
-    let margin = {top: 15, left: 40, bottom: 40, right: 15};
+    let margin = { top: 15, left: 40, bottom: 40, right: 15 };
 
     let width = 500;
     let height = 500;
@@ -53,7 +53,7 @@ $(document).ready(function () {
         .text("Geschwindigkeit in km/h");
 
 
-    let calculateDifference = (date1, date2) => Math.round(Math.abs(new Date(date1).getTime() - new Date(date2).getTime()) / (24 * 60 * 60 * 1000));
+let calculateDifference = (date1, date2) => Math.round(Math.abs(new Date(date1).getTime() - new Date(date2).getTime()) / (24 * 60 * 60 * 1000));
     let dateRange = calculateDifference(dateList[0], dateList[dateList.length - 1]);
     let dateDistance = (data) => {
         let diff = calculateDifference(data[1], dateList[dateList.length - 1]) / dateRange;
