@@ -42,8 +42,7 @@ include_once("php/db_link.php");
 </nav>
 <div class="container-fluid bg-secondary text-center text-light">
     <h4 class="p-3 font-weight-bold">
-        <?php
-        echo $quotes[rand(0, count($quotes) - 1)] ?>
+        <?php echo $quotes[rand(0, count($quotes) - 1)] ?>
     </h4>
 </div>
 <div class="m-5">
